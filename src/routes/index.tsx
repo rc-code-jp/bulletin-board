@@ -1,13 +1,14 @@
-import { FileRoute } from '@tanstack/react-router'
+import { FileRoute } from "@tanstack/react-router";
+import { RegisterForm } from "../components/RegisterForm/RegisterForm";
 
 export const Route = new FileRoute('/').createRoute({
-  component: HomeComponent,
-})
+	component: HomeComponent,
+});
 
 function HomeComponent() {
-  return (
-    <div className="p-2">
-      <h3>Welcome Home!</h3>
-    </div>
-  )
+	return (
+		<div>
+			<RegisterForm></RegisterForm>
+		</div>
+	);
 }

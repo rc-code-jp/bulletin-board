@@ -1,6 +1,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as AboutIndexImport } from './routes/about/index'
+import { Route as ViewQImport } from './routes/view/$q'
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -11,10 +12,19 @@ const AboutIndexRoute = AboutIndexImport.update({
   path: '/about/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const ViewQRoute = ViewQImport.update({
+  path: '/view/$q',
+  getParentRoute: () => rootRoute,
+} as any)
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/view/$q': {
+      preLoaderRoute: typeof ViewQImport
       parentRoute: typeof rootRoute
     }
     '/about/': {
@@ -23,4 +33,8 @@ declare module '@tanstack/react-router' {
     }
   }
 }
-export const routeTree = rootRoute.addChildren([IndexRoute, AboutIndexRoute])
+export const routeTree = rootRoute.addChildren([
+  IndexRoute,
+  ViewQRoute,
+  AboutIndexRoute,
+])
